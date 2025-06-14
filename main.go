@@ -31,7 +31,7 @@ func main() {
 	handler := newHandler(db)
 
 	r := gin.New()
-	r.GET("/", healthCheckHandler)
+	r.GET("/", handler.healthCheckHandler)
 	r.GET("/accounts", handler.listAccountHandler)
 	r.POST("/accounts", handler.createAccountHandler)
 	r.DELETE("/accounts/:id", handler.deleteAccountHandler)
@@ -39,7 +39,7 @@ func main() {
 	r.Run()
 }
 
-func healthCheckHandler(ctx *gin.Context) {
+func (handler *Handler) healthCheckHandler(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "Hello World!"})
 }
 func (handler *Handler) listAccountHandler(ctx *gin.Context) {
