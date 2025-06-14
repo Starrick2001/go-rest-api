@@ -30,7 +30,7 @@ func main() {
 	db.AutoMigrate(&Account{})
 	handler := newHandler(db)
 
-	r := gin.New()
+	r := gin.Default()
 	r.GET("/", handler.healthCheckHandler)
 	r.GET("/accounts", handler.listAccountHandler)
 	r.POST("/accounts", handler.createAccountHandler)
