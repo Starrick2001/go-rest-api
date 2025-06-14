@@ -31,7 +31,7 @@ func main() {
 		AppPort = "8080" // Default port if not set in environment variables
 		log.Printf("Environment variable APP_PORT not found, using default port %s", AppPort)
 	}
-	if err := r.Run(AppPort); err != nil {
+	if err := r.Run(":" + AppPort); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 		panic(err)
 	}

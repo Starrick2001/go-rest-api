@@ -16,9 +16,7 @@ func Setup() {
 
 	if EnvError != nil {
 		log.Fatal("Error loading .env file: ", EnvError.Error())
-		// panic("Failed to load environment variables")
 	}
-	log.Println("Environment variables loaded successfully")
 
 	DbHost := os.Getenv("DB_HOST")
 	DbPort := os.Getenv("DB_PORT")
