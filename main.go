@@ -36,7 +36,7 @@ func main() {
 	r.POST("/accounts", handler.createAccountHandler)
 	r.DELETE("/accounts/:id", handler.deleteAccountHandler)
 
-	r.Run()
+	r.Run("0.0.0.0:3000")
 }
 
 func (handler *Handler) healthCheckHandler(ctx *gin.Context) {
