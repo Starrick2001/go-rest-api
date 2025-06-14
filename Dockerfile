@@ -18,7 +18,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # Stage 2: Create a minimal image
-FROM alpine:latest
+FROM alpine:3.22.0
 
 # Set the working directory
 WORKDIR /root/
