@@ -3,6 +3,7 @@ FROM golang:1.24.2-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
+ENV GIN_MODE=release
 
 # Copy go.mod and go.sum files to download dependencies
 COPY go.mod go.sum ./
