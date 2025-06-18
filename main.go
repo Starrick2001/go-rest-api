@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 type Account struct {
@@ -17,7 +18,12 @@ type Account struct {
 }
 
 func main() {
+	EnvError := godotenv.Load(".env")
 	models.Setup()
+
+	if EnvError != nil {
+		log.Fatal("Error loading .env file: ", EnvError.Error())
+	}
 	r := gin.Default()
 	api := r.Group("/api/v1")
 
@@ -25,6 +31,7 @@ func main() {
 
 	auth := api.Group("/auth")
 	auth.POST("/register", controllers.Register)
+	auth.POST("/login", controllers.Login)
 
 	AppPort, isEnvFound := os.LookupEnv("SERVER_PORT")
 	if !isEnvFound {

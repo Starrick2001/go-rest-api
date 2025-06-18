@@ -34,3 +34,32 @@ func Register(ctx *gin.Context) {
 		"message": "User registered successfully",
 	})
 }
+
+type LoginRequest struct {
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required,min=8"`
+}
+
+func Login(ctx *gin.Context) {
+	var body LoginRequest
+	if err := ctx.ShouldBindJSON(&body); err != nil {
+		ctx.JSON(400, gin.H{
+			"error": "Invalid request body: " + err.Error(),
+		})
+		return
+	}
+	account := &models.Account{
+		Email:    body.Email,
+		Password: body.Password,
+	}
+	token, err := models.CheckLogin(account.Email, account.Password)
+	if err != nil {
+		ctx.JSON(401, gin.H{
+			"error": "Invalid email or password",
+		})
+		return
+	}
+	ctx.JSON(200, gin.H{
+		"token": token,
+	})
+}
