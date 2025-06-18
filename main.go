@@ -22,7 +22,7 @@ func main() {
 	models.Setup()
 
 	if EnvError != nil {
-		log.Fatal("Error loading .env file: ", EnvError.Error())
+		log.Print("Error loading .env file: ", EnvError.Error())
 	}
 	r := gin.Default()
 	api := r.Group("/api/v1")
